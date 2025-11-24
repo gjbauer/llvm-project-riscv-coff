@@ -436,6 +436,32 @@ enum RelocationTypesMips : unsigned {
   IMAGE_REL_MIPS_PAIR = 0x0025,
 };
 
+// RISC-V COFF relocation types - based on actual EDK2 implementation
+enum RelocationTypesRISCV : unsigned {
+  // Base relocation types (for runtime relocation in UEFI)
+  IMAGE_REL_BASED_RISCV_HI20   = 5,    // High 20 bits of 32-bit absolute address
+  IMAGE_REL_BASED_RISCV_LOW12I = 7,    // Low 12 bits in I-type instruction format  
+  IMAGE_REL_BASED_RISCV_LOW12S = 8,    // Low 12 bits in S-type instruction format
+  
+  // Object file relocation types (for static linking)
+  // These need to be defined for the linker to work
+  IMAGE_REL_RISCV_32           = 0x0001,
+  IMAGE_REL_RISCV_64           = 0x0002,
+  IMAGE_REL_RISCV_BRANCH       = 0x0003,
+  IMAGE_REL_RISCV_JAL          = 0x0004,
+  IMAGE_REL_RISCV_HI20         = 0x0005,
+  IMAGE_REL_RISCV_LO12_I       = 0x0006,
+  IMAGE_REL_RISCV_LO12_S       = 0x0007,
+  IMAGE_REL_RISCV_PCREL_HI20   = 0x0008,
+  IMAGE_REL_RISCV_PCREL_LO12_I = 0x0009,
+  IMAGE_REL_RISCV_PCREL_LO12_S = 0x000A,
+  IMAGE_REL_RISCV_CALL         = 0x000B,
+  IMAGE_REL_RISCV_CALL_PLT     = 0x000C,
+  IMAGE_REL_RISCV_RELATIVE     = 0x000D,
+  IMAGE_REL_RISCV_COPY         = 0x000E,
+  IMAGE_REL_RISCV_JUMP_SLOT    = 0x000F
+};
+
 enum DynamicRelocationType : unsigned {
   IMAGE_DYNAMIC_RELOCATION_GUARD_RF_PROLOGUE = 1,
   IMAGE_DYNAMIC_RELOCATION_GUARD_RF_EPILOGUE = 2,

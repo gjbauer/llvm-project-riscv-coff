@@ -23,8 +23,10 @@ class MCCodeEmitter;
 class MCContext;
 class MCInstrInfo;
 class MCObjectTargetWriter;
+class MCObjectWriter;
 class MCRegisterInfo;
 class MCSubtargetInfo;
+class MCStreamer;
 class Target;
 
 MCCodeEmitter *createRISCVMCCodeEmitter(const MCInstrInfo &MCII,
@@ -36,6 +38,14 @@ MCAsmBackend *createRISCVAsmBackend(const Target &T, const MCSubtargetInfo &STI,
 
 std::unique_ptr<MCObjectTargetWriter> createRISCVELFObjectWriter(uint8_t OSABI,
                                                                  bool Is64Bit);
+
+// COFF support
+MCStreamer *createRISCVWinCOFFStreamer(MCContext &C, 
+                                     std::unique_ptr<MCAsmBackend> &&AB,
+                                     std::unique_ptr<MCObjectWriter> &&OW,
+                                     std::unique_ptr<MCCodeEmitter> &&CE);
+
+std::unique_ptr<MCObjectTargetWriter> createRISCVWinCOFFObjectWriter(bool Is64Bit);
 } // namespace llvm
 
 // Defines symbolic names for RISC-V registers.
