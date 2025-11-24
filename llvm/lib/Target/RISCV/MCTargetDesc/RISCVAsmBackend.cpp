@@ -22,7 +22,7 @@
 #include "llvm/Support/ErrorHandling.h"
 #include "llvm/Support/LEB128.h"
 #include "llvm/Support/raw_ostream.h"
-#include "RISCVMCTargetDesc.h"
+#include "RISCVWinCOFFObjectWriter.h"
 
 using namespace llvm;
 
@@ -955,7 +955,7 @@ std::unique_ptr<MCObjectTargetWriter>
 RISCVAsmBackend::createObjectTargetWriter() const {
   const Triple &TT = STI.getTargetTriple();
   if (TT.isOSWindows() || TT.isOSBinFormatCOFF())
-    return createRISCVWinCOFFObjectWriter(Is64Bit);
+    return llvm::createRISCVWinCOFFObjectWriter(Is64Bit);
   
   // Existing ELF writers...
   return createRISCVELFObjectWriter(OSABI, Is64Bit);

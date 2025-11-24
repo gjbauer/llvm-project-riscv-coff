@@ -44,8 +44,6 @@ MCStreamer *createRISCVWinCOFFStreamer(MCContext &C,
                                      std::unique_ptr<MCAsmBackend> &&AB,
                                      std::unique_ptr<MCObjectWriter> &&OW,
                                      std::unique_ptr<MCCodeEmitter> &&CE);
-
-std::unique_ptr<MCObjectTargetWriter> createRISCVWinCOFFObjectWriter(bool Is64Bit);
 } // namespace llvm
 
 // Defines symbolic names for RISC-V registers.

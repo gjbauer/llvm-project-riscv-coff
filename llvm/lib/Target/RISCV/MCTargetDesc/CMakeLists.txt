@@ -24,3 +24,7 @@ add_llvm_component_library(LLVMRISCVDesc
   ADD_TO_COMPONENT
   RISCV
 )
+
+if(UNIX)
+  target_link_options(LLVMRISCVDesc PRIVATE "LINKER:--whole-archive")
+endif()

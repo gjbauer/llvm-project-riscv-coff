@@ -16,6 +16,7 @@
 #include "llvm/MC/MCObjectWriter.h"
 #include "llvm/MC/MCValue.h"
 #include "llvm/Support/ErrorHandling.h"
+#include "RISCVWinCOFFObjectWriter.h"
 
 using namespace llvm;
 
@@ -30,7 +31,6 @@ public:
                         const MCFixup &Fixup, bool IsCrossSection,
                         const MCAsmBackend &MAB) const override;
 };
-}
 
 RISCVWinCOFFObjectWriter::RISCVWinCOFFObjectWriter(bool Is64Bit)
     : MCWinCOFFObjectTargetWriter(Is64Bit ? COFF::IMAGE_FILE_MACHINE_RISCV64
@@ -104,8 +104,11 @@ unsigned RISCVWinCOFFObjectWriter::getRelocType(MCContext &Ctx, const MCValue &T
     return COFF::IMAGE_REL_RISCV_32;
   }
 }
+} // namespace
 
-std::unique_ptr<MCObjectTargetWriter>
+namespace llvm {
+LLVM_EXTERNAL_VISIBILITY std::unique_ptr<MCObjectTargetWriter>
 createRISCVWinCOFFObjectWriter(bool Is64Bit) {
   return std::make_unique<RISCVWinCOFFObjectWriter>(Is64Bit);
+}
 }
